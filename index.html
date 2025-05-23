@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>빛을 잡아라!</title>
+    <!-- Google Fonts (Montserrat) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="score-board">
+            점수: <span id="score">0</span> | 
+            놓친 횟수: <span id="misses-count">0</span> / <span id="max-misses">3</span>
+        </div>
+        <div id="game-area">
+            <!-- 빛 타겟이 여기에 동적으로 추가됩니다. -->
+        </div>
+        <button id="start-button">시작!</button>
+        <div id="game-over-message" style="display:none;">게임 오버!</div>
+    </div>
+
+    <!-- jQuery v1.7.1 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
