@@ -22,11 +22,14 @@ body {
     font-size: 22px;
     margin-bottom: 20px;
     font-weight: bold;
-    color: #a0a0ff; /* 연한 파란색/보라색 점수판 */
+    color: #8888cc; /* Slightly less bright for labels */
+    letter-spacing: 0.5px;
 }
 
-#score-board span {
-    color: #fff; /* 흰색으로 강조 */
+#score-board span { /* This targets the numbers */
+    color: #fff; /* Bright white for numbers */
+    text-shadow: 0 0 3px #fff, 0 0 5px #a0a0ff; /* Subtle neon glow for numbers */
+    padding-left: 5px; /* Space out numbers from labels */
 }
 
 #game-area {
@@ -84,7 +87,8 @@ body {
 #start-button:active {
     background: linear-gradient(145deg, #3a3ad0, #6a6ad0);
     box-shadow: 0 2px 10px rgba(90, 90, 255, 0.3);
-    transform: translateY(1px);
+    transform: translateY(1px) scale(0.98); /* Slightly shrink and move */
+    box-shadow: 0 1px 5px rgba(90, 90, 255, 0.25); /* Reduced shadow */
 }
 
 #game-over-message {
@@ -92,5 +96,59 @@ body {
     font-size: 32px;
     font-weight: bold;
     color: #ff6b6b; /* 밝은 빨강 */
-    text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.7), 0 0 15px rgba(255, 107, 107, 0.5); /* Enhanced shadow */
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+#game-over-message.game-over-visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+/* Starry background */
+#star-container { /* Defined in JS, but good to note its properties */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Ensures stars don't interfere with game clicks */
+    overflow: hidden; /* Ensure stars don't accidentally go outside if math is off */
+}
+
+.star {
+    /* Base properties mostly set by JS for randomization:
+       position: absolute;
+       left, top, width, height, backgroundColor, borderRadius, opacity (initial),
+       animationName, animationDuration, animationDelay,
+       animationIterationCount, animationTimingFunction.
+    */
+    /* The JS sets opacity to 0 initially, then animation takes over. */
+    /* backgroundColor is set to rgba(255, 255, 220, 0.8) by JS,
+       but the animation controls its visible opacity. */
+}
+
+.slow-down-light {
+    /* Ensure these override the default .light-target styles if set by JS directly */
+    background-color: #81D4FA !important; /* Light Blue */
+    box-shadow: 
+        0 0 5px #81D4FA,
+        0 0 10px #81D4FA,
+        0 0 20px #81D4FA,
+        0 0 30px #4FC3F7, /* Slightly darker blue for outer glow */
+        0 0 40px #4FC3F7 !important;
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.7; /* Max opacity for the twinkle. Randomized durations/delays make it varied */
+    }
+    100% {
+        opacity: 0;
+    }
 }
